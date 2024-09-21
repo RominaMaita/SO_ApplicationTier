@@ -3,6 +3,9 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
+from Products import *
+from Connection import *
+
 class FormsProducts:
     def Forms():
         try:

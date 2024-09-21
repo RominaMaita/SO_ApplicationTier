@@ -12,4 +12,9 @@ class CConection:
             
             return conection
         except mysql.connector.Error as error:
-            print("No funciona mi chamo".format(error))        
+            print("No funciona mi chamo".format(error))
+            
+            return conection 
+        
+        
+    ConectionDataBase()
