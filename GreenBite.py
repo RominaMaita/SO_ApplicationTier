@@ -7,7 +7,41 @@ from Products import *
 from Connection import *
 
 class FormsProducts:
+    
+    global base 
+    base = None
+    
+    global textBoxId
+    textBoxId = None
+    
+    global textBoxName
+    textBoxName = None
+    
+    global textBoxPrice
+    textBoxPrice = None
+    
+    global textBoxDate
+    textBoxDate = None
+    
+    global textBoxStock
+    textBoxStock = None
+    
+    global groupBox
+    groupBox = None
+    
+    global tree 
+    tree  = None
+    
     def Forms():
+        global base
+        global textBoxId
+        global textBoxName
+        global textBoxPrice
+        global textBoxDate
+        global textBoxStock
+        global groupBox
+        
+    
         try:
             base = Tk()
             base.geometry("1200x300")
@@ -41,7 +75,7 @@ class FormsProducts:
             
             
             #BOTONES
-            Button(groupBox, text="Save", width=10).grid(row=5, column=0)
+            Button(groupBox, text="Save", width=10, command=saveRegister).grid(row=5, column=0)
             Button(groupBox, text="Edit", width=10).grid(row=5, column=1)
             Button(groupBox, text="Delete", width=10).grid(row=5, column=2)
             
@@ -63,14 +97,38 @@ class FormsProducts:
             tree.heading("# 5", text="Stock")
             
             
-            
-            
-            
+            tree.pack()
             
             # Corregido: llamamos correctamente al método mainloop
             base.mainloop()
             
         except ValueError as error:
             print("NO FUNCIONA TU WEBADA")
+            
+def saveRegister():
+    global textBoxName, textBoxPrice, textBoxDate, textBoxStock
+    
+    try:
+        if textBoxName is None or textBoxPrice is None or textBoxDate is None or textBoxStock is None:
+            print("Los cosos no estan inicializados") 
+            return 
+        
+        names = textBoxName.get()
+        price = textBoxPrice.get()
+        date = textBoxDate.get()
+        stock = textBoxStock.get()
+        
+        
+        Products.addProducts(names, price, date, stock)
+        messagebox.showinfo("Info", "Data saved")
+        
+        textBoxId.delete(0, END)
+        textBoxName.delete(0, END)
+        textBoxPrice.delete(0, END)
+        textBoxDate.delete(0, END)
+        textBoxStock.delete(0, END)
+        
+    except ValueError as error:
+        print("No funciona mi chamo".format(error))
             
 FormsProducts.Forms()
